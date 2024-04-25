@@ -1,0 +1,114 @@
+﻿@model IEnumerable<ProyWebStore.Models.Producto>
+
+@{
+    ViewData["Title"] = "IndexProductos";
+}
+
+<h1>IndexProductos</h1>
+
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@TempData["mensaje"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<br />
+<p>
+    <a asp-action="CreateProducto" class="btn btn-warning">Nuevo Articulo</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMarca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RutaImagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreImagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMarca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.RutaImagen))
+                {
+                    <img src="@item.RutaImagen" alt="Imagen del producto" style="max-width: 100px;" />
+                }
+                else
+                {
+                    <span>No disponible</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreImagen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProducto", new { id = item.IdProducto }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Detalle", "DetailsProducto", new { id = item.IdProducto }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "DeleteProducto", new { id = item.IdProducto }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
