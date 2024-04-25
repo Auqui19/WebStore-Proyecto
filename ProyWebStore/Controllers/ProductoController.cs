@@ -8,7 +8,7 @@ namespace ProyWebStore.Controllers
     public class ProductoController : Controller
     {
         private string cad_cone = "";
-
+        
         public ProductoController(IConfiguration configuration)
         {
             cad_cone = configuration.GetConnectionString("conexiondb");
