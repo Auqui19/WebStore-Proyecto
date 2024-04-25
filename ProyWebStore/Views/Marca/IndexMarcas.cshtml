@@ -1,10 +1,8 @@
-﻿@model IEnumerable<ProyWebStore.Models.Categoria>
+﻿@model IEnumerable<ProyWebStore.Models.Marca>
 
 @{
-    ViewData["Title"] = "IndexCategorias";
+    ViewData["Title"] = "IndexMarcas";
 }
-
-<h1>IndexCategorias</h1>
 
 @if (TempData["mensaje"] != null)
 {
@@ -16,13 +14,13 @@
 
 <br />
 <p>
-    <a asp-action="CreateCategoria" class="btn btn-primary">Nueva Categoria</a>
+    <a asp-action="CreateMarca" class="btn btn-primary">Nueva Categoria</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdCategoria)
+                @Html.DisplayNameFor(model => model.IdMarca)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
@@ -40,7 +38,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCategoria)
+                @Html.DisplayFor(modelItem => item.IdMarca)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
@@ -52,8 +50,8 @@
                 @Html.DisplayFor(modelItem => item.FechaRegistro)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditCategoria", new { id = item.IdCategoria }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Delete", "DeleteCategoria", new { id = item.IdCategoria }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Edit", "EditMarca", new { id = item.IdMarca }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Delete", "DeleteMarca", new { id = item.IdMarca }, new { @class = "btn btn-danger" })
             </td>
         </tr>
 }
