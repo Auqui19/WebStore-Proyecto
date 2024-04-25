@@ -201,7 +201,7 @@ namespace ProyWebStore.Controllers
             try
             {
                 TempData["mensaje"] = EliminarProducto(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexProductos));
             }
             catch (Exception ex)
             {
@@ -215,7 +215,7 @@ namespace ProyWebStore.Controllers
             if (archivo != null && archivo.Length > 0)
             {
                 // Directorio donde se guardará el archivo, puedes cambiarlo según tu estructura de carpetas
-                string directorio = Path.Combine(Directory.GetCurrentDirectory(), "Archivos");
+                string directorio = Path.Combine(Directory.GetCurrentDirectory(), "Images");
 
                 // Verificar si el directorio existe, si no, crearlo
                 if (!Directory.Exists(directorio))
@@ -236,7 +236,7 @@ namespace ProyWebStore.Controllers
                 }
 
                 // Devolver la ruta relativa del archivo (para almacenarla en la base de datos)
-                return Path.Combine("Archivos", nombreArchivo);
+                return Path.GetFullPath("Images", nombreArchivo);
             }
             else
             {
