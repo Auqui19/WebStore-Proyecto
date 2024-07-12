@@ -2,12 +2,11 @@
 {
     public class Cliente
     {
-        public int IdCliente { get; set; }
-        public string Nombres { get; set; } = "";
-        public string Apellidos { get; set; } = "";
-        public string Correo { get; set; } = "";
-        public string Clave { get; set; } = "";
-        public bool Restablecer { get; set; }
-        public DateTime FechaRegistro { get; set; }
+        public int idCliente { get; set; }
+        public string nombres { get; set; } = "";
+        public string apellido { get; set; } = "";
+        public int docIdentidad { get; set; }
+        public bool activo { get; set; }
+        public DateTime fechaRegistro { get; set; }
     }
 }

@@ -4,11 +4,9 @@
     ViewData["Title"] = "DeleteCategoria";
 }
 
-<h1>DeleteCategoria</h1>
 
-<h3>Estás seguro de Eliminar esta CATEGORIA?</h3>
+<h1>Estás seguro de Desactivar esta CATEGORIA?</h1>
 <div>
-    <h4>Categoria</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -38,7 +36,8 @@
     </dl>
     
     <form asp-action="DeleteCategoria">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <input type="hidden" name="id" value="@Model.IdCategoria" />
+        <input type="submit" value="Desactivar" class="btn btn-danger" /> |
         <a asp-action="IndexCategorias" class="btn btn-warning">Regresar</a>
     </form>
 </div>

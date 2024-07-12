@@ -4,29 +4,24 @@
     ViewData["Title"] = "IndexProductos";
 }
 
-<h1>IndexProductos</h1>
-
+<h3>Listado de Electrodomésticos</h3>
 
 @if (TempData["mensaje"] != null)
 {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>@TempData["mensaje"]</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-<br />
 <p>
-    <a asp-action="CreateProducto" class="btn btn-warning">Nuevo Articulo</a>
+    <a asp-action="CreateProducto" class="btn btn-primary">
+         Agregar Producto</a>
 </p>
-
-
-<table class="table">
-    <thead>
+<hr />
+<table class="table table-striped table-bordered border-black">
+    <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProducto)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -34,10 +29,10 @@
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdMarca)
+                Marca
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdCategoria)
+                Categoria
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Precio)
@@ -46,69 +41,70 @@
                 @Html.DisplayNameFor(model => model.Stock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RutaImagen)
+                Imagen
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreImagen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th></th>
+            <th style ="width: 200px;">Acciones</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProducto)
-            </td>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.IdMarca)
             </td>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.IdCategoria)
             </td>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
-            <td>
-                @if (!string.IsNullOrEmpty(item.RutaImagen))
-                {
-                    <img src="@item.RutaImagen" alt="Imagen del producto" style="max-width: 100px;" />
-                }
-                else
-                {
-                    <span>No disponible</span>
-                }
+            <td class="align-middle">
+                    <img src="@Url.Content("/productos/" + item.ImgProducto + ".png")"
+                         alt="@item.ImgProducto"
+                         style="width:100px;height:80px;" />
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreImagen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditProducto", new { id = item.IdProducto }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Detalle", "DetailsProducto", new { id = item.IdProducto }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Delete", "DeleteProducto", new { id = item.IdProducto }, new { @class = "btn btn-danger" })
+                <td class="align-middle">
+                    <a href="@Url.Action("EditProducto", new { id = item.IdProducto })" class="btn btn-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                            <path d="M16 5l3 3" />
+                        </svg>
+                    </a>
+                    |
+                    <a href="@Url.Action("DetailsProducto", new { id = item.IdProducto })" class="btn btn-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-description"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M9 17h6" /><path d="M9 13h6" /></svg>
+                    </a>
+                    |
+                    <a href="@Url.Action("DeleteProducto", new { id = item.IdProducto })" class="btn btn-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 7l16 0" />
+                            <path d="M10 11l0 6" />
+                            <path d="M14 11l0 6" />
+                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                        </svg>
+                    </a>                  
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(".alert").delay(3000).slideUp(500);
+    </script>
+}

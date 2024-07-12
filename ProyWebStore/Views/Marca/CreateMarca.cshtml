@@ -4,9 +4,7 @@
     ViewData["Title"] = "CreateMarca";
 }
 
-<h1>CreateMarca</h1>
-
-<h4>Marca</h4>
+<h1>Crear Una Marca</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,11 +15,13 @@
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
                 </label>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Grabar" class="btn btn-primary" /> |
                 <a asp-action="IndexMarcas" class="btn btn-warning">Regresar</a>

@@ -1,0 +1,80 @@
+﻿@model ProyWebStore.Models.Usuario
+
+@{
+    ViewData["Title"] = "EditUsuario";
+}
+
+<h3>Editar Usuario</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditUsuario">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdUsuario" class="control-label"></label>
+                <input asp-for="IdUsuario" class="form-control"  readonly/>
+                <span asp-validation-for="IdUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocIdentidad" class="control-label"></label>
+                <input asp-for="DocIdentidad" class="form-control" />
+                <span asp-validation-for="DocIdentidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomUsuario" class="control-label"></label>
+                <input asp-for="NomUsuario" class="form-control" />
+                <span asp-validation-for="NomUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clave" class="control-label"></label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
+                </label>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="IdRol" class="control-label"></label>
+                <select asp-for="IdRol" asp-items="@ViewBag.ROL" class="form-select">
+                    <option disabled selected>Seleccione</option>
+                </select>
+                <span asp-validation-for="IdRol" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Actualizar" class="btn btn-primary" /> |
+                <a asp-action="IndexUsuarios" class="btn btn-warning">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @ViewBag.mensaje
+</div>
+
+

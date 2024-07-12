@@ -4,13 +4,11 @@
     ViewData["Title"] = "CreateProducto";
 }
 
-<h1>CreateProducto</h1>
-
-<h4>Producto</h4>
+<h3>Crear un Producto</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateProducto" enctype="multipart/form-data">
+        <form asp-action="CreateProducto">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
@@ -25,14 +23,14 @@
             <div class="form-group">
                 <label asp-for="IdMarca" class="control-label"></label>
                 <select asp-for="IdMarca" asp-items="@ViewBag.marca" class="form-select">
-                    <option>Seleccione</option>
+                    <option disabled selected>Seleccione</option>
                 </select>
                 <span asp-validation-for="IdMarca" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdCategoria" class="control-label"></label>
                 <select asp-for="IdCategoria" asp-items="@ViewBag.categoria" class="form-select">
-                    <option>Seleccione</option>
+                    <option disabled selected>Seleccione</option>
                 </select>
                 <span asp-validation-for="IdCategoria" class="text-danger"></span>
             </div>
@@ -47,10 +45,11 @@
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Archivo" class="control-label"></label>
-                <input asp-for="Archivo" type="file" class="form-control" />
-                <span asp-validation-for="Archivo" class="text-danger"></span>
+                <label asp-for="ImgProducto" class="control-label"></label>
+                <input asp-for="ImgProducto" class="form-control" />
+                <span asp-validation-for="ImgProducto" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
@@ -58,7 +57,7 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Grabar" class="btn btn-primary" /> |
+                <input type="submit" value="Grabar Producto" class="btn btn-primary" /> |
                 <a asp-action="IndexProductos" class="btn btn-warning">Regresar</a>
             </div>
         </form>

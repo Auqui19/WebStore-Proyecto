@@ -4,9 +4,7 @@
     ViewData["Title"] = "EditProducto";
 }
 
-<h1>EditProducto</h1>
-
-<h4>Producto</h4>
+<h1>Editar Producto</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,14 +28,14 @@
             <div class="form-group">
                 <label asp-for="IdMarca" class="control-label"></label>
                 <select asp-for="IdMarca" asp-items="@ViewBag.marca" class="form-select">
-                    <option>Seleccione</option>
+                    <option disabled selected>Seleccione</option>
                 </select>
                 <span asp-validation-for="IdMarca" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdCategoria" class="control-label"></label>
                 <select asp-for="IdCategoria" asp-items="@ViewBag.categoria" class="form-select">
-                    <option>Seleccione</option>
+                    <option disabled selected>Seleccione</option>
                 </select>
                 <span asp-validation-for="IdCategoria" class="text-danger"></span>
             </div>
@@ -52,15 +50,11 @@
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RutaImagen" class="control-label"></label>
-                <input asp-for="RutaImagen" type="file" class="form-control" />
-                <span asp-validation-for="RutaImagen" class="text-danger"></span>
+                <label asp-for="ImgProducto" class="control-label"></label>
+                <input asp-for="ImgProducto" class="form-control" />
+                <span asp-validation-for="ImgProducto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NombreImagen" class="control-label"></label>
-                <input asp-for="NombreImagen" class="form-control" />
-                <span asp-validation-for="NombreImagen" class="text-danger"></span>
-            </div>
+            <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)

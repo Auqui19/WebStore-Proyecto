@@ -1,64 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ProyWebStore.DAO;
 using ProyWebStore.Models;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ProyWebStore.Controllers
 {
+    [Authorize(Roles = "1")]
     public class CategoriaController : Controller
     {
-        private string cad_cone = "";
+        private readonly CategoriaDAO daoCat;
 
-        public CategoriaController(IConfiguration confi)
+        public CategoriaController(CategoriaDAO cat)
         {
-            cad_cone = confi.GetConnectionString("conexiondb");
+            daoCat = cat;
         }
-
-        #region CRUD DE CATEGORIA
-        public List<Categoria> GetCategorias() 
-        {
-            var lista = new List<Categoria>();
-            SqlDataReader dr = SqlHelper.ExecuteReader(cad_cone, "sp_ListarCategorias");
-            while (dr.Read()) 
-            {
-                lista.Add(new Categoria ()
-                {
-                    IdCategoria = dr.GetInt32(0),
-                    Descripcion = dr.GetString(1),
-                    Activo = dr.GetBoolean(2),
-                    FechaRegistro = dr.GetDateTime(3),
-                });
-            }
-            return lista;
-        }
-
-        public string GrabarCategoria(Categoria obj)
-        {
-            try
-            {
-                SqlHelper.ExecuteNonQuery(cad_cone, "sp_AgregarCategoria",
-                                  obj.IdCategoria, obj.Descripcion, obj.Activo);
-                return $"La categoria: {obj.Descripcion} " + "fue Registrado / Actualizado correctamente";
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-
-        public string EliminarCategoria(int cod_cat)
-        {
-            SqlHelper.ExecuteNonQuery(cad_cone, "sp_EliminarCategoria", cod_cat);
-            string cad = $"La categoria: {cod_cat} fue eliminado correctamente";
-            return cad;
-        }
-
-        #endregion 
-
+        
         public IActionResult IndexCategorias()
         {
-            var listado = GetCategorias();
+            var listado = daoCat.GetCategorias();
             return View(listado);
         }
 
@@ -77,7 +39,7 @@ namespace ProyWebStore.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    TempData["mensaje"] = GrabarCategoria(obj);
+                    TempData["mensaje"] = daoCat.GrabarCategoria(obj);
                     return RedirectToAction(nameof(IndexCategorias));
                 }
             }
@@ -91,7 +53,7 @@ namespace ProyWebStore.Controllers
         // GET: CategoriaController/Edit
         public ActionResult EditCategoria(int id)
         {
-            var buscado = GetCategorias().Find(cat => cat.IdCategoria == id);            
+            var buscado = daoCat.GetCategorias().Find(cat => cat.IdCategoria == id);            
             return View(buscado);
         }
 
@@ -104,7 +66,7 @@ namespace ProyWebStore.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    TempData["mensaje"] = GrabarCategoria(obj);
+                    TempData["mensaje"] = daoCat.GrabarCategoria(obj);
                     return RedirectToAction(nameof(IndexCategorias));
                 }
             }
@@ -118,7 +80,7 @@ namespace ProyWebStore.Controllers
         // GET: CategoriaController/Delete
         public ActionResult DeleteCategoria(int id)
         {
-            var buscado = GetCategorias().Find(cat => cat.IdCategoria == id);
+            var buscado = daoCat.GetCategorias().Find( c => c.IdCategoria == id);
             return View(buscado);
         }
 
@@ -129,7 +91,7 @@ namespace ProyWebStore.Controllers
         {
             try
             {
-                TempData["mensaje"] = EliminarCategoria(id);
+                TempData["mensaje"] = daoCat.EliminarCategoria(id);
                 return RedirectToAction(nameof(IndexCategorias));
             }
             catch (Exception ex)

@@ -2,11 +2,16 @@
 {
     public class Carrito
     {
-        public int IdCarrito { get; set; }
-        public int IdCliente { get; set; }
-        public Cliente? Cliente { get; set; }
-        public int IdProducto { get; set; }
-        public Producto? Producto { get; set; }
+        public int Codigo { get; set; }
+        public string Nombre { get; set; } = "";
+        public decimal Precio { get; set; }
         public int Cantidad { get; set; }
+        public decimal Importe
+        {
+            get
+            {
+                return Precio * Cantidad;
+            }
+        }
     }
 }

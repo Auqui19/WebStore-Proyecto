@@ -1,20 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ProyWebStore.DAO;
 using ProyWebStore.Models;
 using System.Diagnostics;
 
 namespace ProyWebStore.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ProductoDAO productoDAO;
+        private readonly ClienteDAO clienteDAO;
+        private readonly CategoriaDAO categoriaDAO;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ProductoDAO producto, 
+                ClienteDAO cliente, CategoriaDAO categoria)
         {
             _logger = logger;
+            productoDAO = producto;
+            clienteDAO = cliente;
+            categoriaDAO = categoria;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Salir() 
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("LoginUsuario", "LoginUsuario");
+        }
+
+        public IActionResult Index(string nombreUsuario)
+        {
+            ViewBag.NombreUsuario = nombreUsuario;
+            int cantProductos = productoDAO.GetProductos().Count;
+            int cantCategorias = categoriaDAO.GetCategorias().Count;
+            int cantClientes = clienteDAO.GetClientes().Count;
+            ViewData["CantProductos"] = cantProductos;
+            ViewData["CantCategorias"] = cantCategorias;
+            ViewData["CantClientes"] = cantClientes;
             return View();
         }
 

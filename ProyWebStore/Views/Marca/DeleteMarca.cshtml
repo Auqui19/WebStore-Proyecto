@@ -4,11 +4,8 @@
     ViewData["Title"] = "DeleteMarca";
 }
 
-<h1>DeleteMarca</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Quieres desactivar esta Marca?</h3>
 <div>
-    <h4>Marca</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -38,7 +35,8 @@
     </dl>
     
     <form asp-action="DeleteMarca">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <input type="hidden" name="id" value="@Model.IdMarca" />
+        <input type="submit" value="Desactivar" class="btn btn-danger" /> |
         <a asp-action="IndexMarcas" class="btn btn-warning">Regresar</a>
     </form>
 </div>

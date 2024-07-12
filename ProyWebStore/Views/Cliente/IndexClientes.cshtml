@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ProyWebStore.Models.Cliente>
+
+@{
+    ViewData["Title"] = "IndexClientes";
+}
+
+<h3>Lista de clientes</h3>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@TempData["mensaje"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<p>
+    <a asp-action="CreateCliente" class="btn btn-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users-group"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" /><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M17 10h2a2 2 0 0 1 2 2v1" /><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>
+         Registrar Cliente</a> 
+</p>
+<table class="table table-bordered border-black">
+    <thead class="table-dark">
+        <tr> 
+            <th>
+                @Html.DisplayNameFor(model => model.nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.docIdentidad)
+            </th>
+            <th style="width: 120px;" class="text-center">
+                Estado
+            </th>
+            <th style="width: 200px;">
+                Fecha Registro
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+                <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.apellido)
+            </td>
+                <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.docIdentidad)
+            </td>
+                <td class="text-center align-middle">
+                    @if (item.activo)
+                    {
+                        <span class="text-white bg-success px-3 py-1 rounded-pill">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="text-white bg-danger px-3 py-1 rounded-pill">Inactivo</span>
+                    }
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.fechaRegistro)
+                </td>
+                <td class="align-middle">
+                @Html.ActionLink("Editar", "EditClientes",
+                             new { id = item.idCliente }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Detalle", "DetailsClientes",
+                             new { id = item.idCliente }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Eliminar", "DeleteClientes",
+                             new { id = item.idCliente }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts
+                {
+    <script type="text/javascript">
+        $(".alert").delay(3000).slideUp(500)
+    </script>
+}

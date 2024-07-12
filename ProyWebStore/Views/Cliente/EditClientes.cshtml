@@ -1,0 +1,53 @@
+﻿@model ProyWebStore.Models.Cliente
+
+@{
+    ViewData["Title"] = "EditClientes";
+}
+
+<h1>EditClientes</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditClientes">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="idCliente" class="control-label"></label>
+                <input asp-for="idCliente" class="form-control" readonly />
+                <span asp-validation-for="idCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombres" class="control-label"></label>
+                <input asp-for="nombres" class="form-control" />
+                <span asp-validation-for="nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apellido" class="control-label"></label>
+                <input asp-for="apellido" class="form-control" />
+                <span asp-validation-for="apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="docIdentidad" class="control-label"></label>
+                <input asp-for="docIdentidad" class="form-control" />
+                <span asp-validation-for="docIdentidad" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="activo" /> @Html.DisplayNameFor(model => model.activo)
+                </label>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" /> |
+                <a asp-action="IndexClientes" class="btn btn-warning">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @ViewBag.mensaje
+</div>
+
+

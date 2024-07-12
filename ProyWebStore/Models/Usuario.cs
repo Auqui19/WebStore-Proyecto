@@ -2,14 +2,16 @@
 {
     public class Usuario
     {
-        public int IdUsuario { get; set; }
+        public int? IdUsuario { get; set; }
         public string Nombres { get; set; } = "";
         public string Apellidos { get; set; } = "";
+        public int DocIdentidad { get; set; }
+        public string Telefono { get; set; } = "";
         public string Correo { get; set; } = "";
+        public string NomUsuario { get; set; } = "";
         public string Clave { get; set; } = "";
-        public bool Restablecer { get; set; }
-        public bool Activo { get; set; }
+        public bool Activo { get; set; } = true;
+        public int IdRol { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public string Rol { get; set; } = "";
     }
 }

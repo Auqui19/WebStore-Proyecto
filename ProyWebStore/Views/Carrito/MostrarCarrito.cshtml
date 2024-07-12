@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ProyWebStore.Models.Carrito>
+
+@{
+    ViewData["Title"] = "MostrarCarrito";
+}
+
+<h2>Mostrar Carrito</h2>
+
+<p>
+    <a asp-action="ListarProductos" class="btn btn-warning">Seguir Comprando</a>
+    <a asp-action="PagarCarrito" class="btn btn-success">Realizar Pago</a>
+</p>
+
+@if (TempData["Mensaje"] != null)
+{
+    <br />
+    <div class="alert alert-danger" alert-dismissible fade show" role="alert">
+        <strong>@TempData["Mensaje"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table table-bordered border-black">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importe)
+            </td>
+            <td>
+                    @Html.ActionLink("Aumentar", "AumentarItemCarrito", new { id=item.Codigo }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Eliminar", "EliminarItemCarrito", new { id = item.Codigo }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+
+    <tr>
+        <td colspan="4">Cantidad de Articulos: @ViewBag.contador</td>
+        <td colspan="3">Importe Total : @ViewBag.suma_importe</td>
+    </tr>
+
+</table>
